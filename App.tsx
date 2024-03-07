@@ -1,6 +1,6 @@
 // Packages
 import * as React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { Pressable, StyleSheet, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text } from "react-native";
@@ -13,10 +13,15 @@ type RootStackParamList = {
   Home: undefined;
 };
 
+type IButtonProps = {
+  onPress: () => void;
+  title: string;
+};
+
 const Home = () => (
   <SafeAreaView style={styles.container}>
     <Text style={styles.title}>Trumps</Text>
-    <View style={styles.inputContainer}>
+    <View>
       <TextInput
         style={styles.input}
         placeholderTextColor="#FFFFFF"
@@ -28,6 +33,7 @@ const Home = () => (
         placeholder="Player 2 Name"
       />
     </View>
+    <Button title="Start Game" onPress={() => console.log("Start Game")} />
   </SafeAreaView>
 );
 
@@ -43,6 +49,14 @@ function App() {
   );
 }
 
+const Button = ({ onPress, title }: IButtonProps) => {
+  return (
+    <Pressable style={styles.button} onPress={onPress}>
+      <Text style={styles.buttonText}>{title}</Text>
+    </Pressable>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -55,10 +69,18 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#FFFFFF",
   },
-  inputContainer: {},
   input: {
     fontSize: 24,
+    marginVertical: 10,
     color: "#FFFFFF",
+  },
+  button: {
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 20,
   },
 });
 
