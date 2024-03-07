@@ -20,6 +20,12 @@ type IButtonProps = {
 
 const Home = () => {
   const [players, setPlayers] = useState<string[]>(["", ""]);
+
+  const addPlayers = (players: string[]) => {
+    const newPlayers = [...players, ""];
+    return setPlayers(newPlayers);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Trumps</Text>
@@ -40,7 +46,7 @@ const Home = () => {
         ))}
       </View>
       <View>
-        <Button title="Add Player" onPress={() => console.log("Start Game")} />
+        <Button title="Add Player" onPress={() => addPlayers(players)} />
         <Button title="Start Game" onPress={() => console.log("Start Game")} />
       </View>
     </SafeAreaView>
