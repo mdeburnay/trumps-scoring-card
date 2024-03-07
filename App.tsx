@@ -1,6 +1,14 @@
 // Packages
 import { useState } from "react";
-import { Pressable, StyleSheet, TextInput } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text } from "react-native";
@@ -34,28 +42,37 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Trumps</Text>
-      <View>
-        {players.map((player: string, index: number) => (
-          <TextInput
-            key={index}
-            style={styles.input}
-            placeholder={`Player ${index + 1}`}
-            placeholderTextColor={"#FFFFFF"}
-            value={player}
-            onChangeText={(text) => {
-              const newPlayers = [...players];
-              newPlayers[index] = text;
-              setPlayers(newPlayers);
-            }}
-          />
-        ))}
-      </View>
-      <View>
-        <Button title="Add Player" onPress={() => addPlayer(players)} />
-        <Button title="Remove Player" onPress={() => removePlayer()} />
-        <Button title="Start Game" onPress={() => console.log("Start Game")} />
-      </View>
+      <KeyboardAvoidingView>
+        <ScrollView>
+          <Text style={styles.title}>Trumps</Text>
+          <View>
+            {players.map((player: string, index: number) => (
+              <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <TextInput
+                  key={index}
+                  style={styles.input}
+                  placeholder={`Player ${index + 1}`}
+                  placeholderTextColor={"#FFFFFF"}
+                  value={player}
+                  onChangeText={(text) => {
+                    const newPlayers = [...players];
+                    newPlayers[index] = text;
+                    setPlayers(newPlayers);
+                  }}
+                />
+              </TouchableWithoutFeedback>
+            ))}
+          </View>
+          <View>
+            <Button title="Add Player" onPress={() => addPlayer(players)} />
+            <Button title="Remove Player" onPress={() => removePlayer()} />
+            <Button
+              title="Start Game"
+              onPress={() => console.log("Start Game")}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -83,9 +100,6 @@ const Button = ({ onPress, title }: IButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 50,
-    alignItems: "center",
-    justifyContent: "space-around",
     backgroundColor: "#6495ED",
   },
   title: {
