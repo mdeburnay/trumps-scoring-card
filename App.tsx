@@ -21,8 +21,14 @@ type IButtonProps = {
 const Home = () => {
   const [players, setPlayers] = useState<string[]>(["", ""]);
 
-  const addPlayers = (players: string[]) => {
+  const addPlayer = (players: string[]) => {
     const newPlayers = [...players, ""];
+    return setPlayers(newPlayers);
+  };
+
+  const removePlayer = () => {
+    const newPlayers = [...players];
+    newPlayers.pop();
     return setPlayers(newPlayers);
   };
 
@@ -46,7 +52,8 @@ const Home = () => {
         ))}
       </View>
       <View>
-        <Button title="Add Player" onPress={() => addPlayers(players)} />
+        <Button title="Add Player" onPress={() => addPlayer(players)} />
+        <Button title="Remove Player" onPress={() => removePlayer()} />
         <Button title="Start Game" onPress={() => console.log("Start Game")} />
       </View>
     </SafeAreaView>
