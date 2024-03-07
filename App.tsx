@@ -1,5 +1,5 @@
 // Packages
-import * as React from "react";
+import { useState } from "react";
 import { Pressable, StyleSheet, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -18,24 +18,34 @@ type IButtonProps = {
   title: string;
 };
 
-const Home = () => (
-  <SafeAreaView style={styles.container}>
-    <Text style={styles.title}>Trumps</Text>
-    <View>
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#FFFFFF"
-        placeholder="Player 1 Name"
-      />
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#FFFFFF"
-        placeholder="Player 2 Name"
-      />
-    </View>
-    <Button title="Start Game" onPress={() => console.log("Start Game")} />
-  </SafeAreaView>
-);
+const Home = () => {
+  const [players, setPlayers] = useState<string[]>(["", ""]);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Trumps</Text>
+      <View>
+        {players.map((player: string, index: number) => (
+          <TextInput
+            key={index}
+            style={styles.input}
+            placeholder={`Player ${index + 1}`}
+            placeholderTextColor={"#FFFFFF"}
+            value={player}
+            onChangeText={(text) => {
+              const newPlayers = [...players];
+              newPlayers[index] = text;
+              setPlayers(newPlayers);
+            }}
+          />
+        ))}
+      </View>
+      <View>
+        <Button title="Add Player" onPress={() => console.log("Start Game")} />
+        <Button title="Start Game" onPress={() => console.log("Start Game")} />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -75,6 +85,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   button: {
+    margin: 10,
     backgroundColor: "#FFFFFF",
     padding: 10,
     borderRadius: 5,
