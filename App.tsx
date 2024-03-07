@@ -1,6 +1,6 @@
 // Packages
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text } from "react-native";
@@ -15,8 +15,18 @@ type RootStackParamList = {
 
 const Home = () => (
   <SafeAreaView style={styles.container}>
-    <View>
-      <Text style={styles.text}>Trumps</Text>
+    <Text style={styles.title}>Trumps</Text>
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="#FFFFFF"
+        placeholder="Player 1 Name"
+      />
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="#FFFFFF"
+        placeholder="Player 2 Name"
+      />
     </View>
   </SafeAreaView>
 );
@@ -36,12 +46,18 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    paddingHorizontal: 50,
     alignItems: "center",
+    justifyContent: "space-around",
     backgroundColor: "#6495ED",
   },
-  text: {
+  title: {
     fontSize: 40,
+    color: "#FFFFFF",
+  },
+  inputContainer: {},
+  input: {
+    fontSize: 24,
     color: "#FFFFFF",
   },
 });
