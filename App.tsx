@@ -3,11 +3,13 @@ import { useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   TextInput,
   TouchableWithoutFeedback,
+  useWindowDimensions,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -27,6 +29,8 @@ type IButtonProps = {
 };
 
 const Home = () => {
+  const windowHeight = useWindowDimensions().height;
+
   const [players, setPlayers] = useState<string[]>(["", ""]);
 
   const addPlayer = (players: string[]) => {
@@ -42,11 +46,16 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView keyboardVerticalOffset={-550}>
-        <ScrollView>
+    <SafeAreaView style={[styles.container]}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={{ flex: 1 }}>
           <Text style={styles.title}>Trumps</Text>
-          <View>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          >
             {players.map((player: string, index: number) => (
               <TouchableWithoutFeedback
                 key={index}
@@ -66,7 +75,7 @@ const Home = () => {
                 />
               </TouchableWithoutFeedback>
             ))}
-          </View>
+          </ScrollView>
           <View style={styles.buttonContainer}>
             <Button title="Add Player" onPress={() => addPlayer(players)} />
             <Button title="Remove Player" onPress={() => removePlayer()} />
@@ -75,7 +84,7 @@ const Home = () => {
               onPress={() => console.log("Start Game")}
             />
           </View>
-        </ScrollView>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -105,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#6495ED",
+    paddingVertical: 20,
   },
   title: {
     fontSize: 40,
