@@ -47,7 +47,10 @@ const Home = () => {
           <Text style={styles.title}>Trumps</Text>
           <View>
             {players.map((player: string, index: number) => (
-              <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => Keyboard.dismiss()}
+              >
                 <TextInput
                   key={index}
                   style={styles.input}
@@ -63,7 +66,7 @@ const Home = () => {
               </TouchableWithoutFeedback>
             ))}
           </View>
-          <View>
+          <View style={styles.buttonContainer}>
             <Button title="Add Player" onPress={() => addPlayer(players)} />
             <Button title="Remove Player" onPress={() => removePlayer()} />
             <Button
@@ -105,10 +108,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     color: "#FFFFFF",
+    textAlign: "center",
   },
   input: {
     fontSize: 24,
     marginVertical: 10,
+    textAlign: "center",
     color: "#FFFFFF",
   },
   button: {
@@ -119,6 +124,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 });
 
