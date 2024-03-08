@@ -36,13 +36,14 @@ const Home = () => {
 
   const removePlayer = () => {
     const newPlayers = [...players];
-    newPlayers.pop();
+
+    newPlayers.length > 2 && newPlayers.pop();
     return setPlayers(newPlayers);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView keyboardVerticalOffset={-550}>
         <ScrollView>
           <Text style={styles.title}>Trumps</Text>
           <View>
