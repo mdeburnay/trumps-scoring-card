@@ -1,5 +1,5 @@
 // Packages
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -46,9 +46,10 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
+        enabled
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={{ flex: 1 }}>
@@ -75,15 +76,15 @@ const Home = () => {
                 />
               </TouchableWithoutFeedback>
             ))}
+            <View style={styles.buttonContainer}>
+              <Button title="Add Player" onPress={() => addPlayer(players)} />
+              <Button title="Remove Player" onPress={() => removePlayer()} />
+              <Button
+                title="Start Game"
+                onPress={() => console.log("Start Game")}
+              />
+            </View>
           </ScrollView>
-          <View style={styles.buttonContainer}>
-            <Button title="Add Player" onPress={() => addPlayer(players)} />
-            <Button title="Remove Player" onPress={() => removePlayer()} />
-            <Button
-              title="Start Game"
-              onPress={() => console.log("Start Game")}
-            />
-          </View>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
