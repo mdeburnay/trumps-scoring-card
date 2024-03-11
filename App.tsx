@@ -29,18 +29,22 @@ type IButtonProps = {
   title: string;
 };
 
-const Game = () => {
+const Game = ({ route, navigation }: any) => {
+  const { players } = route.params;
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        enabled
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <View style={{ flex: 1 }}>
-          <Text style={styles.title}>Game</Text>
-        </View>
-      </KeyboardAvoidingView>
+    <SafeAreaView style={styles.gamesContainer}>
+      <View>
+        <Text style={styles.title}>Game</Text>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+        {players.map((player: string, index: number) => {
+          return (
+            <Text style={{ fontSize: 18, color: "#FFFFFF" }} key={index}>
+              {player}
+            </Text>
+          );
+        })}
+      </View>
     </SafeAreaView>
   );
 };
@@ -97,7 +101,11 @@ const Home = ({ navigation }: any) => {
             <Button title="Remove Player" onPress={() => removePlayer()} />
             <Button
               title="Start Game"
-              onPress={() => navigation.navigate("Game")}
+              onPress={() =>
+                navigation.navigate("Game", {
+                  players,
+                })
+              }
             />
           </View>
         </View>
@@ -132,6 +140,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#6495ED",
     paddingVertical: 20,
+  },
+  gamesContainer: {
+    flex: 1,
+    backgroundColor: "#6495ED",
   },
   title: {
     fontSize: 40,
