@@ -72,7 +72,7 @@ const Home = ({ navigation }: any) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={{ flex: 1 }}>
-          <Text style={styles.title}>Trumps</Text>
+          <Text style={styles.title}>Bets</Text>
           <ScrollView
             contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           >
