@@ -12,10 +12,10 @@ import {
 } from "react-native";
 
 // COMPONENTS
-import { Button } from "../components/Button";
+import { Button } from "@components";
 
 // STYLES
-import { styles } from "../styles";
+import { styles } from "@styles";
 
 export const Home = ({ navigation }: any) => {
   const [players, setPlayers] = useState<string[]>(["", ""]);

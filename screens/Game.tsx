@@ -2,7 +2,7 @@
 import { SafeAreaView, View, Text } from "react-native";
 
 // STYLES
-import { styles } from "../styles";
+import { styles } from "@styles";
 
 export const Game = ({ route, navigation }: any) => {
   const { players } = route.params;

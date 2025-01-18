@@ -3,11 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // SCREENS
-import { Home } from "./screens/Home";
-import { Game } from "./screens/Game";
+import { Home, Game } from "./screens";
 
 // UTILS
-import { screenOptions } from "./utils/screenOptions";
+import { screenOptions } from "./utils";
 
 type RootStackParamList = {
   Home: undefined;
